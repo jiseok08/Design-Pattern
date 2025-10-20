@@ -621,6 +621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7873476fd9cdbe4c80c12ddb3d81dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 199148093}
+  screen: {fileID: 1779767260}
 --- !u!4 &984509601
 Transform:
   m_ObjectHideFlags: 0
@@ -633,8 +635,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1296682227}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &996753612
@@ -845,7 +846,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1779767261}
-  m_Father: {fileID: 984509601}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1001,11 +1002,11 @@ MonoBehaviour:
       - m_Target: {fileID: 984509600}
         m_TargetAssemblyTypeName: SceneryManager, Assembly-CSharp
         m_MethodName: LoadScene
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1208,3 +1209,4 @@ SceneRoots:
   - {fileID: 774376618}
   - {fileID: 996753615}
   - {fileID: 984509601}
+  - {fileID: 1296682227}
