@@ -35,7 +35,7 @@ public class EventManager
     {
         if (dictionary.TryGetValue(condition, out var action))
         {
-
+            action?.Invoke();
         }
     }
 
