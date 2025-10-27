@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Knife : Weapon
+public class Charactor : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
@@ -9,7 +9,15 @@ public class Knife : Weapon
         animator = GetComponent<Animator>();
     }
 
-    public override void Attack()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Attack();
+        }
+    }
+
+    public void Attack()
     {
         animator.SetTrigger("Attack");
     }

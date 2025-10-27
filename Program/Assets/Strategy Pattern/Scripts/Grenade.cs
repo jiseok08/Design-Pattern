@@ -4,19 +4,32 @@ using UnityEngine.UIElements;
 
 public class Grenade : Weapon
 {
-    [SerializeField] new MeshRenderer renderer;
-    [SerializeField] Material material;
+    [SerializeField] Coroutine coroutine;
+    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] Material [ ] materials;
 
     private void Awake()
     {
-        renderer = GetComponentInChildren<MeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     public override void Attack()
     {
-        Debug.Log("Grenade Attack");
+        if (coroutine == null)
+        {
+            coroutine = StartCoroutine(Activate());
+        }
+    }
 
-        
+    IEnumerator Activate()
+    {
+        meshRenderer.material = materials[0];
+
+        yield return new WaitForSeconds(2.0f);
+
+        meshRenderer.material = materials[1];
+
+        coroutine = null;
     }
 
 }
