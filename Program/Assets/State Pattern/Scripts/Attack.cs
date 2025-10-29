@@ -4,23 +4,24 @@ public class Attack : IStateable
 {
     public void Enter(Character character)
     {
-        AnimatorStateInfo animatorStateInfo = character.animator.GetCurrentAnimatorStateInfo(0);
-
-        if (character.animator.IsInTransition(0) || animatorStateInfo.IsName("Attack"))
-        {
-            return;
-        }
+        character.animator.ResetTrigger("Attack");
 
         character.animator.SetTrigger("Attack");
     }
 
     public void Exit(Character character)
     {
-
+        character.animator.SetInteger("X", 0);
+        character.animator.SetInteger("Y", 0);
     }
 
     public void Update(Character character)
     {
+        AnimatorStateInfo animatorStateInfo = character.animator.GetCurrentAnimatorStateInfo(0);
 
+        if (animatorStateInfo.IsName("Attack") && character.animator.IsInTransition(0) == false)
+        {
+            character.SwitchState(new Idle());
+        }
     }
 }

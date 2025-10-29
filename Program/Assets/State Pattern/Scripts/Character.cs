@@ -10,6 +10,11 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        stateable = new Idle();
+    }
+
     private void Update()
     {
         stateable.Update(this);
@@ -23,6 +28,4 @@ public class Character : MonoBehaviour
 
         stateable.Enter(this);
     }
-
-
 }
