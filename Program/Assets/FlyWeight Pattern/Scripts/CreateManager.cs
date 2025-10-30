@@ -3,37 +3,21 @@ using UnityEngine;
 
 public class CreateManager : MonoBehaviour
 {
-    [SerializeField] Vector3 vector;
-    [SerializeField] GameObject gameObject;
-
-    [SerializeField] float seconds;
-
-    private void Awake()
-    {
-        vector = transform.position.normalized;
-
-        gameObject.SetActive(true);
-    }
+    [SerializeField] GameObject prefab;
+    [SerializeField] Transform createPosition;
 
     void Start()
     {
-        Create();
+        StartCoroutine(Create());
     }
 
-    private void Update()
-    {
-        
-    }
-
-    public IEnumerator Create()
+    IEnumerator Create()
     {
         while (true)
-        {
-            Instantiate(gameObject);
+        {         
+            yield return CoroutineManager.GetCachedWait(Random.RandomRange(1, 6));
             
-            gameObject.SetActive(true);
-            
-            yield return new WaitForSeconds(seconds);
+            Instantiate(prefab, createPosition.position, prefab.transform.rotation);
         }
     }
 }
