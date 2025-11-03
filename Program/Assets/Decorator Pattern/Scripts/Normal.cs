@@ -2,13 +2,5 @@ using UnityEngine;
 
 public class Normal : IStatus
 {
-    public virtual void Apply()
-    {
-
-    }
-
-    public virtual void Update()
-    {
-
-    }
+    public virtual void Update() { Debug.Log("Default State");  }
 }

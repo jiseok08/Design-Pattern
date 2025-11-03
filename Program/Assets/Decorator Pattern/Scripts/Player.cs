@@ -4,10 +4,18 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float speed; // 이동 속도
     [SerializeField] float stopDistance = 0.1f; // 목표 지점에 얼마나 가까워졌는지 확인하는 변수
-    
+    [SerializeField] float rotationSpeed = 50f;
+
     [SerializeField] bool isMoving = false;
     [SerializeField] Vector3 targetPosition;
     [SerializeField] RaycastHit rayCastHit;
+
+    [SerializeField] Rigidbody rigidbody;
+
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
 
     void Start()
     {
@@ -27,7 +35,10 @@ public class Player : MonoBehaviour
                 isMoving = true;
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
         if (isMoving)
         {
             Move();
@@ -39,14 +50,26 @@ public class Player : MonoBehaviour
         // 목표 지점 방향 계산
         Vector3 direction = (targetPosition - transform.position).normalized;
 
-        float distance = Vector3.Distance(transform.position, targetPosition);
+        direction.y = 0f;
 
-        transform.position += direction * speed * Time.deltaTime;
+        float distance = direction.magnitude; 
 
         // 도착 지점 확인
         if (distance <= stopDistance)
         {
             isMoving = false;
+
+            rigidbody.linearVelocity = Vector3.zero;
+
+            return;
         }
+
+        rigidbody.MovePosition(rigidbody.position + direction.normalized * speed * Time.fixedDeltaTime);
+
+        Quaternion rargetRotation = Quaternion.LookRotation(direction);
+
+        Quaternion smoothRotation = Quaternion.Slerp(rigidbody.rotation, rargetRotation, rotationSpeed *  Time.fixedDeltaTime);
+
+        rigidbody.MoveRotation(smoothRotation);
     }
 }
