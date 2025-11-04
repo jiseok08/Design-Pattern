@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Debuff
 {
     [SerializeField] float speed; // 이동 속도
     [SerializeField] float stopDistance = 0.1f; // 목표 지점에 얼마나 가까워졌는지 확인하는 변수
@@ -48,9 +48,9 @@ public class Player : MonoBehaviour
     public void Move()
     {
         // 목표 지점 방향 계산
-        Vector3 direction = (targetPosition - transform.position).normalized;
+        Vector3 direction = (targetPosition - transform.position);
 
-        direction.y = 0f;
+        direction.y = 0f; // y축 이동 방지
 
         float distance = direction.magnitude; 
 
@@ -71,5 +71,10 @@ public class Player : MonoBehaviour
         Quaternion smoothRotation = Quaternion.Slerp(rigidbody.rotation, rargetRotation, rotationSpeed *  Time.fixedDeltaTime);
 
         rigidbody.MoveRotation(smoothRotation);
+    }
+
+    public override void Activate()
+    {
+        Debug.Log("Player");
     }
 }

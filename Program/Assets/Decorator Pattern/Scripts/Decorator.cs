@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public abstract class Decorator : IStatus
+public abstract class Decorator : Debuff
 {
-    protected IStatus innerStatus;
+    protected Debuff debuff;
+    [SerializeField] protected Player player;
 
-    public Decorator(IStatus status)
+    public void Awake()
     {
-        innerStatus = status;
+        player = GameObject.Find("Character").GetComponent<Player>();
     }
 
-    public virtual void Update()
+    public Decorator Set(Debuff debuff)
     {
-        innerStatus.Update();
-    }
+        this.debuff = debuff;
+        return this;
+    }   
 }
