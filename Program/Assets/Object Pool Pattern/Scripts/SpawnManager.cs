@@ -5,7 +5,6 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] float radius;
 
-    [SerializeField] GameObject prefab;
     [SerializeField] WaitForSeconds waitForSeconds;
 
     private void Awake()
@@ -22,7 +21,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            GameObject bee = Instantiate(prefab);
+            GameObject bee = ObjectPool.Instance.GetObject();
 
             Vector2 direction = Random.insideUnitCircle.normalized * radius;
 
